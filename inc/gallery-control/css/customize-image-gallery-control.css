@@ -1,0 +1,22 @@
+.image-gallery-attachments {
+    clear: both;
+}
+
+.image-gallery-thumbnail-wrapper {
+    display: inline-block;
+    width: 30%;
+    height: 50px;
+    padding: 0.5%;
+    overflow: hidden;
+}
+.image-gallery-thumbnail-wrapper:hover {
+    cursor: move;
+}
+.image-gallery-thumbnail-wrapper img {
+    height: auto;
+    width: 100%;
+    float: left;
+}
+.gallery-button {
+    margin-top: 15px;
+}
