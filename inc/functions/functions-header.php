@@ -91,8 +91,10 @@ function ignis_header_hero() {
 	$header_animated 	= ignis_typed_strings();
 	$header_subtitle	= get_theme_mod( 'header_subtitle', __( 'Scroll down to begin your adventure', 'ignis') );
 	$header_media		= ignis_media_check();
+	$header_shortcode 	= get_theme_mod( 'header_shortcode' );
 	?>
 
+	<?php if ( $header_media !== 'has-shortcode' ) : ?>
 	<div class="ignis-hero-area <?php echo $header_media; ?>">
 		<?php 
 		if ( has_custom_header() && $header_media == 'has-media' ) {
@@ -128,6 +130,12 @@ function ignis_header_hero() {
 		<?php endif; ?>
 		</div>
 	</div>
+	<?php endif; ?>
+
+	<?php if ( $header_media == 'has-shortcode' ) : ?>
+		<?php echo do_shortcode( $header_shortcode ); ?>
+	<?php endif; ?>
+
 	<?php
 }
 add_action( 'ignis_after_header', 'ignis_header_hero', 9);

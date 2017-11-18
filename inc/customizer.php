@@ -58,7 +58,7 @@ function ignis_customize_register( $wp_customize ) {
         'section'     => 'ignis_section_header',
         'type'        => 'text',
         'settings'    => 'header_subtitle',
-    ) );    
+    ) );
 	// Setting: Typed strings.
 	$wp_customize->add_setting( 'typed_strings', array(
 		'sanitize_callback'    => 'wp_kses_post',
@@ -1053,6 +1053,20 @@ function ignis_customize_register( $wp_customize ) {
 
         )
     ) );
+    
+    // Header shortcode
+     $wp_customize->add_setting( 'header_shortcode', array(
+        'sanitize_callback'    => 'wp_kses_post'
+    ) );
+    $wp_customize->add_control( 'header_shortcode', array(
+        'label'       => __( 'Hero shortcode', 'ignis' ),
+        'section'     => 'header_image',
+        'priority'	  => 3,
+        'type'        => 'text',
+        'settings'    => 'header_shortcode',
+        'description' => __( 'Insert header shortcode here.', 'ignis' ),
+        'active_callback' => 'ignis_maybe_is_shortcode' 
+    ) );
 
     //Disable header overlay
     $wp_customize->add_setting(
@@ -1090,6 +1104,13 @@ function ignis_maybe_is_media( $control ) {
     $option = $control->manager->get_setting( 'hero_type' );
  
     return $option->value() == 'has-media';
+}
+
+function ignis_maybe_is_shortcode( $control ) {
+    
+    $option = $control->manager->get_setting( 'hero_type' );
+    
+    return $option->value() == 'has-shortcode';
 }
 
 /**
