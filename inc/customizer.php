@@ -862,7 +862,6 @@ function ignis_customize_register( $wp_customize ) {
         )
     );
 
-    //___Woocommerce___//
     $wp_customize->add_section(
         'ignis_section_woocommerce',
         array(
@@ -904,7 +903,49 @@ function ignis_customize_register( $wp_customize ) {
             'type'        => 'select',
             'label'       => __('Columns on shop archives', 'ignis'),
             'section'     => 'ignis_section_woocommerce',
-            'priority'    => 13,
+            'priority'    => 12,
+            'choices' => array(
+                '1'     => __('One', 'ignis'),
+                '2'     => __('Two', 'ignis'),
+                '3'     => __('Three', 'ignis'),
+                '4'     => __('Four', 'ignis'),
+            ),
+        )
+    ); 
+    //Related products no.
+    $wp_customize->add_setting(
+        'iwc_related_products_number',
+        array(
+            'sanitize_callback' => 'absint',
+            'default'           => '3',
+        )       
+    );
+    $wp_customize->add_control( 'iwc_related_products_number', array(
+        'type'        => 'number',
+        'priority'    => 13,
+        'section'     => 'ignis_section_woocommerce',
+        'label'       => __('Number of related products on single product page', 'ignis'),
+        'input_attrs' => array(
+            'min'   => 1,
+            'max'   => 100,
+            'step'  => 1,
+        ),
+    ) );
+    //Related products columns
+    $wp_customize->add_setting(
+        'iwc_related_columns_number',
+        array(
+            'sanitize_callback' => 'ignis_sanitize_iwc_columns',
+            'default'           => '3'
+        )
+    );
+    $wp_customize->add_control(
+        'iwc_related_columns_number',
+        array(
+            'type'        => 'select',
+            'label'       => __('Columns on single product page related products', 'ignis'),
+            'section'     => 'ignis_section_woocommerce',
+            'priority'    => 14,
             'choices' => array(
                 '1'     => __('One', 'ignis'),
                 '2'     => __('Two', 'ignis'),

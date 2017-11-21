@@ -1575,7 +1575,7 @@ img {
 ## Woocommerce
 --------------------------------------------------------------*/
 .woocommerce div.product p.price,
- .woocommerce div.product span.price,
+.woocommerce div.product span.price,
 .woocommerce ul.products li.product .price {
 	color: #000;
 	letter-spacing: 1px;
