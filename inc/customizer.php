@@ -943,7 +943,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_related_columns_number',
         array(
             'type'        => 'select',
-            'label'       => __('Columns on single product page related products', 'ignis'),
+            'label'       => __('Columns on single product page related and upsell products', 'ignis'),
             'section'     => 'ignis_section_woocommerce',
             'priority'    => 14,
             'choices' => array(
@@ -1015,7 +1015,23 @@ function ignis_customize_register( $wp_customize ) {
             'type'      => 'checkbox',
             'label'     => __('Hide sorting on archives?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
-            'priority'  => 17,
+            'priority'  => 16,
+        )
+    );
+    //Add to cart
+    $wp_customize->add_setting(
+        'iwc_archive_atc',
+        array(
+            'sanitize_callback' => 'ignis_sanitize_checkbox',
+        )       
+    );
+    $wp_customize->add_control(
+        'iwc_archive_atc',
+        array(
+            'type'      => 'checkbox',
+            'label'     => __('Hide "add to cart" button on archives?', 'ignis'),
+            'section'   => 'ignis_section_woocommerce',
+            'priority'  => 16,
         )
     );
     //Ratings
@@ -1031,10 +1047,10 @@ function ignis_customize_register( $wp_customize ) {
             'type'      => 'checkbox',
             'label'     => __('Hide product ratings on single products?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
-            'priority'  => 15,
+            'priority'  => 17,
         )
     );
-    //Categories
+    //Categories, SKU and Tags
     $wp_customize->add_setting(
         'iwc_product_cats',
         array(
@@ -1045,9 +1061,9 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_product_cats',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product categories on single products?', 'ignis'),
+            'label'     => __('Hide product meta (SKU, categories and tags) on single products?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
-            'priority'  => 16,
+            'priority'  => 17,
         )
     );
 

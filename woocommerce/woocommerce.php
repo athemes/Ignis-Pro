@@ -28,10 +28,17 @@ function ignis_woo_actions() {
     add_action('woocommerce_before_main_content', 'ignis_wrapper_start', 10);
     add_action('woocommerce_after_main_content', 'ignis_wrapper_end', 10);
     remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar' );
-    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
     add_filter( 'woocommerce_show_page_title', '__return_false' );
     remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
     remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+    add_action( 'woocommerce_before_shop_loop', 'ignis_product_columns_wrapper_start', 40 );
+    add_action( 'woocommerce_after_shop_loop', 'ignis_product_columns_wrapper_end', 40 );
+    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_start', 14 );
+    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display',               15 );
+    add_action( 'woocommerce_after_single_product_summary',    'ignis_upsell_display',                15 );
+    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_end', 16 );
+    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_start', 19 );
+    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_end', 21 );
 }
 add_action('wp','ignis_woo_actions');
 
@@ -48,20 +55,6 @@ function ignis_wrapper_end() {
         echo '</main>';
     echo '</div>';
 }
-
-/**
- * Number of related products
- */
-function ignis_related_products_args( $args ) {
-    $iwcRelatedNum = get_theme_mod( 'iwc_related_products_number', 3 );
-    $iwcRelatedColumns = get_theme_mod( 'iwc_related_columns_number', 3 );
-
-    $args['posts_per_page'] = $iwcRelatedNum;
-    $args['columns'] = $iwcRelatedColumns;
-    return $args;
-}
-add_filter( 'woocommerce_output_related_products_args', 'ignis_related_products_args' );
-
 
 /**
  * Update cart
@@ -109,7 +102,6 @@ function ignis_woocommerce_account_link( $items, $args ) {
 }
 add_filter( 'wp_nav_menu_items', 'ignis_woocommerce_account_link', 10, 2 );
 
-
 /**
  * Search icon
  */
@@ -121,7 +113,6 @@ function ignis_menu_search( $items, $args ) {
     return $items;
 }
 add_filter( 'wp_nav_menu_items', 'ignis_menu_search', 10, 2 );
-
 
 /**
  * Returns true if current page is shop, product archive or product tag
@@ -145,7 +136,7 @@ function ignis_archive_products() {
 add_filter( 'loop_shop_per_page', 'ignis_archive_products', 20 );
 
 /**
- * Number of columns
+ * Number of columns on shop/archive page
  */
 function ignis_archive_columns() {
     $iwcShopColumns = get_theme_mod( 'iwc_columns_number', 3 );
@@ -153,6 +144,28 @@ function ignis_archive_columns() {
     return $iwcShopColumns;
 }
 add_filter( 'loop_shop_columns', 'ignis_archive_columns' );
+
+/**
+ * Number of related products and columns
+ */
+function ignis_related_products_args( $args ) {
+    $products = get_theme_mod( 'iwc_related_products_number', 3 );
+    $columns = get_theme_mod( 'iwc_related_columns_number', 3 );
+
+    $args['posts_per_page'] = $products;
+    $args['columns'] = $columns;
+    return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'ignis_related_products_args' );
+
+/**
+ * Number of up sell columns (number of up sells is selected through the product edit screen)
+ * Using the same number for up sell and related products
+ */
+function ignis_upsell_display() {
+    $columns = get_theme_mod( 'iwc_related_columns_number', 3 );
+    woocommerce_upsell_display( -1, $columns );
+}
 
 /**
  * Remove Price on the shop/archive page if the user selected that option
@@ -183,13 +196,6 @@ function ignis_single_ratings_customizer_check() {
     $iwc_product_ratings = get_theme_mod('iwc_product_ratings');
     if ( $iwc_product_ratings == 1 ) :
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
-
-        // Unset the Review tab - not used for now, looks strange without the Review tab
-        // add_filter( 'woocommerce_product_tabs', 'iwc_remove_reviews_tab', 98);
-        // function iwc_remove_reviews_tab($tabs) { 
-        //     unset($tabs['reviews']);
-        //     return $tabs;
-        // }
 	endif;
 }
 add_action('wp','ignis_single_ratings_customizer_check');
@@ -212,11 +218,10 @@ add_action('wp','ignis_archive_results_customizer_check');
 function ignis_single_cats_customizer_check() {
     $iwc_product_cats = get_theme_mod('iwc_product_cats');
     if ( $iwc_product_cats == 1 ) :
-        //remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
 	endif;
 }
 add_action('wp','ignis_single_cats_customizer_check');
-
 
 /**
  * Remove Ordering/Sorting on the shop/archive page if the user selected that option
@@ -228,3 +233,39 @@ function ignis_sorting_customizer_check() {
 	endif;
 }
 add_action('wp','ignis_sorting_customizer_check');
+
+/**
+ * Remove Add to cart button on the shop/archive page if the user selected that option
+ */
+function ignis_atc_customizer_check() {
+    $iwc_archive_atc = get_theme_mod('iwc_archive_atc');
+    if ( $iwc_archive_atc == 1 ) :
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+	endif;
+}
+add_action('wp','ignis_atc_customizer_check');
+
+/**
+ * Product shop/archive wrappers
+ */
+function ignis_product_columns_wrapper_start() {
+    $columns = ignis_archive_columns();
+    echo '<div class="columns-' . $columns . '">';
+}
+
+function ignis_product_columns_wrapper_end() {
+    echo '</div>';
+}
+
+/**
+ * Related and Upsell product wrappers
+ * Not implemented in a very smart way (using order of hooks to add html before and after sections), looking for a better solution
+ */
+function ignis_related_columns_wrapper_start() {
+    $columns = get_theme_mod( 'iwc_related_columns_number', 3 );
+    echo '<div class="columns-' . $columns . '">';
+}
+
+function ignis_related_columns_wrapper_end() {
+    echo '</div>';
+}

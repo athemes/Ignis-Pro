@@ -1587,6 +1587,25 @@ img {
 .woocommerce-page ul.products li.product {
 	width: 30.8%;
 }
+/* ignis pro only */
+.woocommerce .columns-1 ul.products li.product,
+.woocommerce-page .columns-1 ul.products li.product {
+	width: 100%;
+	margin-right: 0;
+}
+.woocommerce .columns-2 ul.products li.product,
+.woocommerce-page .columns-2 ul.products li.product {
+	width: 48.1%;
+}
+.woocommerce .columns-3 ul.products li.product,
+.woocommerce-page .columns-3 ul.products li.product {
+	width: 30.8%;
+}
+.woocommerce .columns-4 ul.products li.product,
+.woocommerce-page .columns-4 ul.products li.product {
+	width: 22.15%;
+}
+/* end ignis pro only */
 .woocommerce-account .content-area,
 .woocommerce-checkout .content-area,
 .woocommerce-cart .content-area {
@@ -1960,6 +1979,14 @@ img {
 	    clear: both;
 	    margin: 0 0 2.992em;
 	}
+	.woocommerce-page .columns-2 ul.products li.product, .woocommerce .columns-2 ul.products li.product,
+	.woocommerce-page .columns-3 ul.products li.product, .woocommerce .columns-3 ul.products li.product,
+	.woocommerce-page .columns-4 ul.products li.product, .woocommerce .columns-4 ul.products li.product {
+	    width: 48%;
+	}
+	.woocommerce-page .columns-1 ul.products li.product, .woocommerce .columns-1 ul.products li.product {
+	    width: 100%;
+	}
 	.footer-banner.has-contact {
 		margin-top: 100px;
 		padding: 0 15px;
@@ -1999,7 +2026,7 @@ img {
 	.portfolio-content {
 		left: 0;
 	}
-	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce-page[class*=columns-] ul.products li.product, .woocommerce[class*=columns-] ul.products li.product {
+	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce-page[class*=columns-] ul.products li.product, .woocommerce[class*=columns-] ul.products li.product, .woocommerce-page div[class*=columns-] ul.products li.product, .woocommerce div[class*=columns-] ul.products li.product {
 		width: 100%;
 	}
 }
