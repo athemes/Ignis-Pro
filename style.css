@@ -1844,7 +1844,7 @@ img {
 	}
 	.footer-contact-form {
 		width: 70%;
-		margin-top: -220px;
+		/* margin-top: -220px; */
 	}
 }
 @media only screen and (max-width: 1024px) {
@@ -1894,18 +1894,16 @@ img {
 	.portfolio-type-4 .ignis-sizer {
 		width: 33%;
 	}
-	.footer-banner.has-contact {
-		margin-top: 100px;
-	}
 	.footer-contact-form {
 		width: 90%;
 		max-width: 600px;
-		margin-top: -130px;
+		margin-top: -160px;
 	}
 }
 @media only screen and (max-width: 767px) {
 	.portfolio-type-1 .hentry,
 	.portfolio-type-2 .hentry,
+	.portfolio-type-3 .hentry,
 	.portfolio-type-5 .hentry {
 		padding: 10px 0;
 	}
@@ -1921,7 +1919,7 @@ img {
 	.portfolio-type-1 .hentry,
 	.portfolio-type-1 .ignis-sizer,
 	.portfolio-type-3 .hentry,
-	.portfolio-type-3 .ignis-sizer
+	.portfolio-type-3 .ignis-sizer,
 	.portfolio-type-5 .hentry,
 	.portfolio-type-5 .ignis-sizer {
 		width: 100%;
@@ -1988,18 +1986,20 @@ img {
 	    width: 100%;
 	}
 	.footer-banner.has-contact {
-		margin-top: 100px;
-		padding: 0 15px;
+		padding: 0;
 	}
 	.footer-contact-form {
-		width: 100%;
-		max-width: 100%;
+		width: auto;
+		max-width: none;
 		padding: 45px 30px;
+		margin-left: -15px;
+		margin-right: -15px;
 	}
 }	
 
 @media only screen and (max-width: 400px) {
-	.portfolio-type-1 .hentry {
+	.portfolio-type-1 .hentry,
+	.portfolio-type-4 .hentry {
 		width: 100%;
 		padding: 10px 0;
 	}
