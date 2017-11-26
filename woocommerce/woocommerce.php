@@ -33,12 +33,8 @@ function ignis_woo_actions() {
     remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
     add_action( 'woocommerce_before_shop_loop', 'ignis_product_columns_wrapper_start', 40 );
     add_action( 'woocommerce_after_shop_loop', 'ignis_product_columns_wrapper_end', 40 );
-    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_start', 14 );
     remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display',               15 );
     add_action( 'woocommerce_after_single_product_summary',    'ignis_upsell_display',                15 );
-    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_end', 16 );
-    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_start', 19 );
-    add_action( 'woocommerce_after_single_product_summary', 'ignis_related_columns_wrapper_end', 21 );
 }
 add_action('wp','ignis_woo_actions');
 
@@ -129,9 +125,9 @@ function ignis_wc_archive_check() {
  * Number of products on shop/archive page
  */
 function ignis_archive_products() {
-    $iwcShopProducts = get_theme_mod( 'iwc_products_number', 10 );
+    $productsNum = get_theme_mod( 'iwc_products_number', 10 );
 
-    return $iwcShopProducts;
+    return $productsNum;
 }
 add_filter( 'loop_shop_per_page', 'ignis_archive_products', 20 );
 
@@ -139,9 +135,9 @@ add_filter( 'loop_shop_per_page', 'ignis_archive_products', 20 );
  * Number of columns on shop/archive page
  */
 function ignis_archive_columns() {
-    $iwcShopColumns = get_theme_mod( 'iwc_columns_number', 3 );
+    $columnsNum = get_theme_mod( 'iwc_columns_number', 3 );
 
-    return $iwcShopColumns;
+    return $columnsNum;
 }
 add_filter( 'loop_shop_columns', 'ignis_archive_columns' );
 
@@ -149,23 +145,53 @@ add_filter( 'loop_shop_columns', 'ignis_archive_columns' );
  * Number of related products and columns
  */
 function ignis_related_products_args( $args ) {
-    $products = get_theme_mod( 'iwc_related_products_number', 3 );
-    $columns = get_theme_mod( 'iwc_related_columns_number', 3 );
+    $productsNum = get_theme_mod( 'iwc_related_products_number', 3 );
+    $columnsNum = get_theme_mod( 'iwc_related_columns_number', 3 );
 
-    $args['posts_per_page'] = $products;
-    $args['columns'] = $columns;
+    $args['posts_per_page'] = $productsNum;
+    $args['columns'] = $columnsNum;
     return $args;
 }
 add_filter( 'woocommerce_output_related_products_args', 'ignis_related_products_args' );
 
 /**
- * Number of up sell columns (number of up sells is selected through the product edit screen)
- * Using the same number for up sell and related products
+ * Number of upsell product columns (number of upsells is selected through the single product edit screen)
+ * Using the same column number for upsell and related products
  */
 function ignis_upsell_display() {
-    $columns = get_theme_mod( 'iwc_related_columns_number', 3 );
-    woocommerce_upsell_display( -1, $columns );
+    $columnsNum = get_theme_mod( 'iwc_related_columns_number', 3 );
+    woocommerce_upsell_display( -1, $columnsNum );
 }
+
+/**
+ * Product shop/archive wrappers
+ * Based on this wrapper and the class added, we are able to style the width of the Shop/Archive products accordingly.
+ */
+function ignis_product_columns_wrapper_start() {
+    $columnsNum = ignis_archive_columns();
+    echo '<div class="columns-' . $columnsNum . '">';
+}
+
+function ignis_product_columns_wrapper_end() {
+    echo '</div>';
+}
+
+/**
+ * Add number of related/uspsell product columns class to the body
+ * Based on this class we are able to style the width of the Related and Upsell products accordingly. 
+ * Woocommerce doesn't wrap these elements with the columns-# class out-of-the-box
+ */
+function ignis_woocommerce_body_class( $classes ){
+    if( is_product() ) {
+        $columnsNum = get_theme_mod( 'iwc_related_columns_number', 3 );
+        if ($columnsNum) {
+            $classes[] = 'ignis-related-columns-' . $columnsNum;
+            $classes[] = 'ignis-upsell-columns-' . $columnsNum;
+        }
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'ignis_woocommerce_body_class' );
 
 /**
  * Remove Price on the shop/archive page if the user selected that option
@@ -244,28 +270,3 @@ function ignis_atc_customizer_check() {
 	endif;
 }
 add_action('wp','ignis_atc_customizer_check');
-
-/**
- * Product shop/archive wrappers
- */
-function ignis_product_columns_wrapper_start() {
-    $columns = ignis_archive_columns();
-    echo '<div class="columns-' . $columns . '">';
-}
-
-function ignis_product_columns_wrapper_end() {
-    echo '</div>';
-}
-
-/**
- * Related and Upsell product wrappers
- * Not implemented in a very smart way (using order of hooks to add html before and after sections), looking for a better solution
- */
-function ignis_related_columns_wrapper_start() {
-    $columns = get_theme_mod( 'iwc_related_columns_number', 3 );
-    echo '<div class="columns-' . $columns . '">';
-}
-
-function ignis_related_columns_wrapper_end() {
-    echo '</div>';
-}

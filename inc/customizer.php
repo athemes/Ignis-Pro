@@ -965,7 +965,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_price',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product price on archives?', 'ignis'),
+            'label'     => __('Hide product price on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 15,
         )
@@ -981,7 +981,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_ratings',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product ratings on archives?', 'ignis'),
+            'label'     => __('Hide product ratings on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 15,
         )
@@ -997,7 +997,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_results',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide number of results on archives?', 'ignis'),
+            'label'     => __('Hide number of results on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 16,
         )
@@ -1013,7 +1013,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_sorting',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide sorting on archives?', 'ignis'),
+            'label'     => __('Hide sorting on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 16,
         )
@@ -1029,7 +1029,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_atc',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide "add to cart" button on archives?', 'ignis'),
+            'label'     => __('Hide "add to cart" button on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 16,
         )
@@ -1045,7 +1045,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_product_ratings',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product ratings on single products?', 'ignis'),
+            'label'     => __('Hide product ratings on single product pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 17,
         )
@@ -1061,7 +1061,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_product_cats',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product meta (SKU, categories and tags) on single products?', 'ignis'),
+            'label'     => __('Hide product meta (SKU, categories and tags) on single product pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 17,
         )

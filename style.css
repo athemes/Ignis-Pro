@@ -1585,24 +1585,32 @@ img {
 }
 .woocommerce ul.products li.product,
 .woocommerce-page ul.products li.product {
-	width: 30.8%;
+	width: 30.75%;
 }
 /* ignis pro only */
 .woocommerce .columns-1 ul.products li.product,
-.woocommerce-page .columns-1 ul.products li.product {
+.woocommerce-page .columns-1 ul.products li.product,
+.woocommerce.ignis-related-columns-1 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-1 .upsells ul.products li.product {
 	width: 100%;
 	margin-right: 0;
 }
 .woocommerce .columns-2 ul.products li.product,
-.woocommerce-page .columns-2 ul.products li.product {
-	width: 48.1%;
+.woocommerce-page .columns-2 ul.products li.product,
+.woocommerce.ignis-related-columns-2 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-2 .upsells ul.products li.product {
+	width: 48%;
 }
 .woocommerce .columns-3 ul.products li.product,
-.woocommerce-page .columns-3 ul.products li.product {
-	width: 30.8%;
+.woocommerce-page .columns-3 ul.products li.product,
+.woocommerce.ignis-related-columns-3 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-3 .upsells ul.products li.product {
+	width: 30.75%;
 }
 .woocommerce .columns-4 ul.products li.product,
-.woocommerce-page .columns-4 ul.products li.product {
+.woocommerce-page .columns-4 ul.products li.product,
+.woocommerce.ignis-related-columns-4 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-4 .upsells ul.products li.product {
 	width: 22.15%;
 }
 /* end ignis pro only */
@@ -1844,7 +1852,6 @@ img {
 	}
 	.footer-contact-form {
 		width: 70%;
-		/* margin-top: -220px; */
 	}
 }
 @media only screen and (max-width: 1024px) {
@@ -1971,7 +1978,10 @@ img {
 		padding-top: 50px;
 		padding-bottom: 50px;
 	}
-	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce-page[class*=columns-] ul.products li.product, .woocommerce[class*=columns-] ul.products li.product {
+	.woocommerce ul.products li.product, 
+	.woocommerce-page ul.products li.product, 
+	.woocommerce-page[class*=columns-] ul.products li.product, 
+	.woocommerce[class*=columns-] ul.products li.product {
 	    width: 48%;
 	    float: left;
 	    clear: both;
@@ -1979,10 +1989,14 @@ img {
 	}
 	.woocommerce-page .columns-2 ul.products li.product, .woocommerce .columns-2 ul.products li.product,
 	.woocommerce-page .columns-3 ul.products li.product, .woocommerce .columns-3 ul.products li.product,
-	.woocommerce-page .columns-4 ul.products li.product, .woocommerce .columns-4 ul.products li.product {
+	.woocommerce-page .columns-4 ul.products li.product, .woocommerce .columns-4 ul.products li.product,
+	.woocommerce.ignis-related-columns-2 .related ul.products li.product, .woocommerce.ignis-upsell-columns-2 .upsells ul.products li.product,
+	.woocommerce.ignis-related-columns-3 .related ul.products li.product, .woocommerce.ignis-upsell-columns-3 .upsells ul.products li.product
+	.woocommerce.ignis-related-columns-4 .related ul.products li.product, .woocommerce.ignis-upsell-columns-4 .upsells ul.products li.product {
 	    width: 48%;
 	}
-	.woocommerce-page .columns-1 ul.products li.product, .woocommerce .columns-1 ul.products li.product {
+	.woocommerce-page .columns-1 ul.products li.product, .woocommerce .columns-1 ul.products li.product,
+	.woocommerce.ignis-related-columns-1 .related ul.products li.product, .woocommerce.ignis-upsell-columns-1 .upsells ul.products li.product {
 	    width: 100%;
 	}
 	.footer-banner.has-contact {
@@ -2026,7 +2040,14 @@ img {
 	.portfolio-content {
 		left: 0;
 	}
-	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce-page[class*=columns-] ul.products li.product, .woocommerce[class*=columns-] ul.products li.product, .woocommerce-page div[class*=columns-] ul.products li.product, .woocommerce div[class*=columns-] ul.products li.product {
+	.woocommerce ul.products li.product, 
+	.woocommerce-page ul.products li.product, 
+	.woocommerce-page[class*=columns-] ul.products li.product, 
+	.woocommerce[class*=columns-] ul.products li.product, 
+	.woocommerce-page div[class*=columns-] ul.products li.product, 
+	.woocommerce div[class*=columns-] ul.products li.product,
+	.woocommerce[class*=ignis-related-columns-] .related ul.products li.product, 
+	.woocommerce[class*=ignis-upsell-columns-] .upsells ul.products li.product {
 		width: 100%;
 	}
 }
