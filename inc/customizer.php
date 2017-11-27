@@ -861,7 +861,8 @@ function ignis_customize_register( $wp_customize ) {
             ),
         )
     );
-
+    
+    //___Woocommerce___//
     $wp_customize->add_section(
         'ignis_section_woocommerce',
         array(
