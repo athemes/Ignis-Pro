@@ -93,9 +93,10 @@ function ignis_header_hero() {
 	$header_media		= ignis_media_check();
 	$header_shortcode 	= get_theme_mod( 'header_shortcode' );
 	$header_slider_warn = __( 'Slider missing. Please select one or more images for the slider in your Customizer page.', 'ignis');
+	$header_shortcode_warn = __( 'Shortcode missing. Please insert a shortcode for the header in your Customizer page.', 'ignis');
 	?>
 
-	<?php if ( $header_media !== 'has-shortcode' ) : ?>
+	<?php if ( $header_media == 'has-media' || $header_media == 'has-slider' ) : ?>
 	<div class="ignis-hero-area <?php echo $header_media; ?>">
 		<?php 
 		if ( has_custom_header() && $header_media == 'has-media' ) {
@@ -111,7 +112,7 @@ function ignis_header_hero() {
 		    	echo '</div>';
 		    } else	{
 				// In case no images are selected for the slider a warning appears
-				echo '<h2 class="slider-warning">'. $header_slider_warn . '</h2>';
+				echo '<h2 class="slider-warning slider-warning--slider">'. $header_slider_warn . '</h2>';
 			}
 		}
 		?>
@@ -136,9 +137,11 @@ function ignis_header_hero() {
 	</div>
 	<?php endif; ?>
 
-	<?php if ( $header_media == 'has-shortcode' ) : ?>
+	<?php if ( $header_media == 'has-shortcode' && ! empty( $header_shortcode )  ) : ?>
 		<?php echo do_shortcode( $header_shortcode ); ?>
-	<?php endif; ?>
+	<?php elseif ( $header_media == 'has-shortcode' ) : 
+		echo '<h2 class="slider-warning slider-warning--shortcode">'. $header_shortcode_warn . '</h2>';
+	endif; ?>
 
 	<?php
 }

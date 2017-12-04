@@ -1067,7 +1067,7 @@ img {
 	position: relative;
 	z-index: 12;
 }
-.slider-warning + .header-text {
+.slider-warning--slider + .header-text {
 	/* if the slider warning for the lack of slider images is present, hide header text */
 	display: none;
 }

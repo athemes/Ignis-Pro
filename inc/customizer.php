@@ -1088,6 +1088,7 @@ function ignis_customize_register( $wp_customize ) {
                 'has-slider'    => __('Slider', 'ignis'),            	
                 'has-media'     => __('Image or video', 'ignis'),
                 'has-shortcode' => __('Shortcode', 'ignis'),
+                'has-none' => __('None', 'ignis'),
             ),
         )
     );
@@ -1219,7 +1220,7 @@ function ignis_sanitize_iwc_columns( $input ) {
 }
 //Header type
 function ignis_sanitize_header( $input ) {
-    if ( in_array( $input, array( 'has-media', 'has-slider', 'has-shortcode' ), true ) ) {
+    if ( in_array( $input, array( 'has-media', 'has-slider', 'has-shortcode', 'has-none' ), true ) ) {
         return $input;
     }
 }
