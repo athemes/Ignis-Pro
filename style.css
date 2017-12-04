@@ -1058,6 +1058,19 @@ img {
 #wp-custom-header-video-button:hover {
 	opacity: 1;
 }
+.slider-warning {
+	/* warning text, currently used as a slider missing warning */
+	padding: 100px 20px;
+	text-align: center;
+	background: #ff6b7e;
+	color: #ffffff;
+	position: relative;
+	z-index: 12;
+}
+.slider-warning + .header-text {
+	/* if the slider warning for the lack of slider images is present, hide header text */
+	display: none;
+}
 /* Sticky header */
 .sticky-header .site-header {
 	position: static;

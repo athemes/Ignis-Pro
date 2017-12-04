@@ -74,7 +74,7 @@ function ignis_typed_strings() {
  */
 function ignis_media_check() {
 
-	$header_hero = get_theme_mod( 'hero_type', 'has-slider' );
+	$header_hero = get_theme_mod( 'hero_type', 'has-media' );
 
 	if ( !is_front_page() ) {
 		return;
@@ -108,7 +108,10 @@ function ignis_header_hero() {
 		    		echo '<img src="' . esc_url( wp_get_attachment_url( $id ) ) . '"/>';
 		    	}
 		    	echo '</div>';
-		    }			
+		    } else	{
+				// In case no images are selected for the slider a warning appears
+				echo '<h2 class="slider-warning">Slider missing. Please select one or more images for the slider in your Customizer page.</h2>';
+			}
 		}
 		?>
 		<div class="header-text clearfix">

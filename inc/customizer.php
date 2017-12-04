@@ -1073,7 +1073,7 @@ function ignis_customize_register( $wp_customize ) {
     $wp_customize->add_setting(
         'hero_type',
         array(
-            'default'           => 'has-slider',
+            'default'           => 'has-media',
             'sanitize_callback' => 'ignis_sanitize_header',
         )
     );
