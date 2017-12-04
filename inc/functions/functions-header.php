@@ -92,6 +92,7 @@ function ignis_header_hero() {
 	$header_subtitle	= get_theme_mod( 'header_subtitle', __( 'Scroll down to begin your adventure', 'ignis') );
 	$header_media		= ignis_media_check();
 	$header_shortcode 	= get_theme_mod( 'header_shortcode' );
+	$header_slider_warn = __( 'Slider missing. Please select one or more images for the slider in your Customizer page.', 'ignis');
 	?>
 
 	<?php if ( $header_media !== 'has-shortcode' ) : ?>
@@ -110,7 +111,7 @@ function ignis_header_hero() {
 		    	echo '</div>';
 		    } else	{
 				// In case no images are selected for the slider a warning appears
-				echo '<h2 class="slider-warning">Slider missing. Please select one or more images for the slider in your Customizer page.</h2>';
+				echo '<h2 class="slider-warning">'. $header_slider_warn . '</h2>';
 			}
 		}
 		?>
