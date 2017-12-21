@@ -1035,6 +1035,22 @@ function ignis_customize_register( $wp_customize ) {
             'priority'  => 16,
         )
     );
+    //Shop breadcrumbs
+    $wp_customize->add_setting(
+        'iwc_archive_bc',
+        array(
+            'sanitize_callback' => 'ignis_sanitize_checkbox',
+        )       
+    );
+    $wp_customize->add_control(
+        'iwc_archive_bc',
+        array(
+            'type'      => 'checkbox',
+            'label'     => __('Hide breadcrumbs on shop and archive and single product pages?', 'ignis'),
+            'section'   => 'ignis_section_woocommerce',
+            'priority'  => 16,
+        )
+    );
     //Ratings
     $wp_customize->add_setting(
         'iwc_product_ratings',

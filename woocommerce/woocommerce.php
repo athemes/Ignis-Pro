@@ -270,3 +270,14 @@ function ignis_atc_customizer_check() {
 	endif;
 }
 add_action('wp','ignis_atc_customizer_check');
+
+/**
+ * Remove Breadcrumbs on the shop/archive and single product pages if the user selected that option
+ */
+function ignis_bc_customizer_check() {
+    $iwc_archive_bc = get_theme_mod('iwc_archive_bc');
+    if ( $iwc_archive_bc == 1 ) :
+		remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0 );
+	endif;
+}
+add_action('wp','ignis_bc_customizer_check');
