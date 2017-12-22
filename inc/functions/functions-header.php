@@ -143,10 +143,6 @@ function ignis_header_hero() {
 		echo '<h2 class="slider-warning slider-warning--shortcode">'. $header_shortcode_warn . '</h2>';
 	endif; ?>
 
-	<?php if ( $header_media == 'has-media' || $header_media == 'has-slider' ) : ?>
-		<h1>TEST!</h1>
-	<?php endif; ?>
-
 	<?php
 }
 add_action( 'ignis_after_header', 'ignis_header_hero', 9);
