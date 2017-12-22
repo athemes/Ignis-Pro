@@ -182,6 +182,12 @@ textarea {
 	width: 100%;
 }
 
+.woocommerce #review_form #respond textarea {
+	min-height: 110px;
+	max-height: 600px;
+	min-width: 100%;
+}
+
 .woocommerce-MyAccount-content fieldset {
 	margin-bottom: 20px;
 }
@@ -189,7 +195,6 @@ textarea {
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
-
 
 /*--------------------------------------------------------------
 ## Menus
@@ -1674,18 +1679,26 @@ img {
 .woocommerce a.remove:hover {
 	background-color: #ff6b7e;
 }
+.woocommerce #respond input#submit,
+.woocommerce #respond input#submit:hover,
+.woocommerce button.button,
+.woocommerce button.button:hover,
+.woocommerce a.button,
+.woocommerce a.button:hover,
 .woocommerce input.button,
-.woocommerce input.button:hover {
-	background-color: #333;
+.woocommerce input.button:hover,
+.woocommerce input.button:disabled,
+.woocommerce input.button:disabled:hover,
+.woocommerce input.button:disabled[disabled],
+.woocommerce input.button:disabled[disabled]:hover {
+	background-color: #ff6b7e;
 	color: #fff;
+	border-radius: 0;
 }
 .woocommerce-cart table.cart td.actions .coupon .input-text {
 	border: 2px solid #dde2e6;
 	width: 100% !important;
 	max-width: 150px;
-}
-.woocommerce input.button:disabled {
-	color: #fff !important;
 }
 .woocommerce-tabs h2,
 .upsells h2,
@@ -1731,6 +1744,7 @@ img {
 .woocommerce-MyAccount-navigation ul {
 	list-style: none;
 	padding: 0;
+	margin-top: 0;
 }
 .woocommerce-MyAccount-navigation li {
 	border-bottom: 2px solid #dde2e6;

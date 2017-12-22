@@ -1024,6 +1024,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_atc',
         array(
             'sanitize_callback' => 'ignis_sanitize_checkbox',
+            'default' => 1,
         )       
     );
     $wp_customize->add_control(

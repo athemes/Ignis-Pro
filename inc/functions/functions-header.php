@@ -96,7 +96,7 @@ function ignis_header_hero() {
 	$header_shortcode_warn = __( 'Shortcode missing. Please insert a shortcode for the header in your Customizer page.', 'ignis');
 	?>
 
-	<?php if ( $header_media == 'has-media' || $header_media == 'has-slider' ) : ?>
+	<?php if ( $header_media !== 'has-shortcode' ) : ?>
 	<div class="ignis-hero-area <?php echo $header_media; ?>">
 		<?php 
 		if ( has_custom_header() && $header_media == 'has-media' ) {
@@ -142,6 +142,10 @@ function ignis_header_hero() {
 	<?php elseif ( $header_media == 'has-shortcode' ) : 
 		echo '<h2 class="slider-warning slider-warning--shortcode">'. $header_shortcode_warn . '</h2>';
 	endif; ?>
+
+	<?php if ( $header_media == 'has-media' || $header_media == 'has-slider' ) : ?>
+		<h1>TEST!</h1>
+	<?php endif; ?>
 
 	<?php
 }
