@@ -19,6 +19,7 @@ $layout = ignis_blog_layout();
 		<?php
 		if ( have_posts() ) : ?>
 			<div class="posts-loop">
+			<div class="ignis-sizer"></div>
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) : the_post();

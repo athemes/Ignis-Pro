@@ -34,6 +34,10 @@ function ignis_fullwidth_singles($classes) {
         $classes[] = 'col-md-6 col-sm-6';
     }
 
+    if ( ( is_search() ) && ( $layout == 'masonry' || $layout == 'masonry-fullwidth' ) ) {
+        $classes[] = 'col-md-6 col-sm-6';
+    }
+
 	return $classes;
 }
 add_filter( 'post_class', 'ignis_fullwidth_singles' );
