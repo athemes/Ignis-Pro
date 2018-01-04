@@ -8,14 +8,20 @@
  */
 
 $hide_meta = get_theme_mod( 'hide_meta_index' );
+$layout = ignis_blog_layout();
+
+if ( $layout == 'classic' ) :
+	$post_thumbnail = '820x0';
+else :
+	$post_thumbnail = '720x0';
+endif;
 
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	
 	<?php if ( '' != get_the_post_thumbnail() ) : ?>
 	<div class="post-thumbnail">
-		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( '720x0' ); ?></a>
+		<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( $post_thumbnail ); ?></a>
 	</div>
 	<?php endif; ?>
 

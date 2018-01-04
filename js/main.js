@@ -2,7 +2,7 @@
 (function($) {
 	var $grid = $('.portfolio-wrapper:not(.portfolio-type-2), .content-area.masonry .posts-loop, .content-area.masonry-fullwidth .posts-loop').isotope({
 		layoutMode: 'masonry',
-		itemSelector: '.hentry',
+		itemSelector: '.hentry, .product',
 		masonry: {
 		   columnWidth: '.ignis-sizer',
 		}

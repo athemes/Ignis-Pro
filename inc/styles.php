@@ -85,8 +85,9 @@ function ignis_custom_styles($custom) {
 
 	//Colors
 	$primary_color = get_theme_mod( 'primary_color', '#ff6b7e' );
-	$custom .= ".woocommerce a.remove,.main-navigation a:hover,a,a:hover,.color-primary { color:" . esc_attr($primary_color) . "}"."\n";
-	$custom .= ".woocommerce input.button.alt,.woocommerce input.button.alt:hover,.woocommerce span.onsale,.portfolio-thumbnail::after,.social-navigation a:hover,.post-template-post_nosidebar_featured .ignis-hero-area::after,.jetpack-portfolio-template-post_nosidebar_featured .ignis-hero-area::after,.main-navigation .menu-icon a:hover,.woocommerce div.product form.cart .button,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.button,button,input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"],.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.woocommerce div.product form.cart .button:hover,.button:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover { background-color:" . esc_attr($primary_color) . "}"."\n";
+	$custom .= ".main-navigation a:hover,a,a:hover,.color-primary,.woocommerce .star-rating span { color:" . esc_attr($primary_color) . "}"."\n";
+	$custom .= ".woocommerce a.remove { color:" . esc_attr($primary_color) . " !important}"."\n";
+	$custom .= ".woocommerce #respond input#submit,.woocommerce #respond input#submit:hover,.woocommerce button.button,.woocommerce button.button:hover,.woocommerce a.button,.woocommerce a.button:hover,.woocommerce input.button,.woocommerce input.button:hover,.woocommerce input.button.alt,.woocommerce input.button.alt:hover,.woocommerce span.onsale,.portfolio-thumbnail::after,.social-navigation a:hover,.post-template-post_nosidebar_featured .ignis-hero-area::after,.jetpack-portfolio-template-post_nosidebar_featured .ignis-hero-area::after,.main-navigation .menu-icon a:hover,.woocommerce div.product form.cart .button,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.button,button,input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"],.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.woocommerce div.product form.cart .button:hover,.button:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover,.woocommerce a.remove:hover,.woocommerce input.button:disabled,.woocommerce input.button:disabled:hover,.woocommerce input.button:disabled[disabled],.woocommerce input.button:disabled[disabled]:hover { background-color:" . esc_attr($primary_color) . "}"."\n";
 	$secondary_color = get_theme_mod( 'secondary_color', '#37c9df' );
 	$custom .= ".typed-cursor,.typed-element,.portfolio-entry-meta a:hover,.cat-links a:hover,.woocommerce-message::before { color:" . esc_attr($secondary_color) . "}"."\n";
 	$custom .= ".woocommerce-message,.portfolio-entry-meta a:hover,.cat-links a:hover,.portfolio-entry-meta a,.cat-links a { border-color:" . esc_attr($secondary_color) . "}"."\n";
@@ -126,12 +127,12 @@ function ignis_custom_styles($custom) {
 
 	if ($buttons_type != 'default') {
 		if ($buttons_type == 'style4') {
-			$custom .= ".woocommerce div.product form.cart .button,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.button,.woocommerce input.button.alt,button,input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"] { background-color: transparent;color:" . esc_attr($primary_color) . ";border: 2px solid " . esc_attr($primary_color) . ";border-radius:15px;}"."\n";
+			$custom .= ".woocommerce div.product form.cart .button,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.button,.woocommerce #respond input#submit,.woocommerce button.button,.woocommerce a.button,.woocommerce input.button,.woocommerce input.button.alt,button,input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"],.woocommerce input.button:disabled,.woocommerce input.button:disabled[disabled] { background-color: transparent;color:" . esc_attr($primary_color) . ";border: 2px solid " . esc_attr($primary_color) . ";border-radius:15px;}"."\n";
 
 		} elseif ( $buttons_type == 'style2') {
 			$custom .= "
 
-			.woocommerce div.product form.cart .button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.button:hover,.woocommerce input.button.alt:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover {
+			.woocommerce div.product form.cart .button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.button:hover,.woocommerce #respond input#submit:hover,.woocommerce button.button:hover,.woocommerce a.button:hover,.woocommerce input.button:hover,.woocommerce input.button.alt:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover,.woocommerce input.button:disabled:hover,.woocommerce input.button:disabled[disabled]:hover {
 			  -webkit-animation: pulse 0.7s;
 			          animation: pulse 0.7s;
 			  box-shadow: 0 0 0 20px transparent;
@@ -149,7 +150,7 @@ function ignis_custom_styles($custom) {
 			"."\n";
 		} elseif ( $buttons_type == 'style3') {
 			$custom .= "
-				.woocommerce div.product form.cart .button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.button:hover,.woocommerce input.button.alt:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover {
+				.woocommerce div.product form.cart .button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.button:hover,.woocommerce #respond input#submit:hover,.woocommerce button.button:hover,.woocommerce a.button:hover,.woocommerce input.button:hover,.woocommerce input.button.alt:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover,.woocommerce input.button:disabled:hover,.woocommerce input.button:disabled[disabled]:hover {
 					box-shadow: 0 18px 5px -10px " . esc_attr( $primary_rgba ) . ";
 					-webkit-transform: translateY(5px);
 					        transform: translateY(5px);
@@ -157,13 +158,18 @@ function ignis_custom_styles($custom) {
 			"."\n";
 		} elseif ( $buttons_type == 'style5') {
 			$custom .= "
-				.woocommerce div.product form.cart .button,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.button,.woocommerce input.button.alt,button,input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"] { background-color: transparent;color:" . esc_attr($primary_color) . ";border: 2px solid " . esc_attr($primary_color) . ";border-radius:15px;transition: all 0.7s;}
-				.woocommerce div.product form.cart .button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.button:hover,.woocommerce input.button.alt:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover {
+				.woocommerce div.product form.cart .button,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button,.button,.woocommerce #respond input#submit,.woocommerce button.button,.woocommerce a.button,.woocommerce input.button,.woocommerce input.button.alt,button,input[type=\"button\"],input[type=\"reset\"],input[type=\"submit\"],.woocommerce input.button:disabled,.woocommerce input.button:disabled[disabled] { background-color: transparent;color:" . esc_attr($primary_color) . ";border: 2px solid " . esc_attr($primary_color) . ";border-radius:15px;transition: all 0.7s;}
+				.woocommerce div.product form.cart .button:hover,.woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,.button:hover,.woocommerce #respond input#submit:hover,.woocommerce button.button:hover,.woocommerce a.button:hover,.woocommerce input.button:hover,.woocommerce input.button.alt:hover,button:hover,input[type=\"button\"]:hover,input[type=\"reset\"]:hover,input[type=\"submit\"]:hover {
 					background: transparent;
 					border-radius: 0;
 					opacity: 1;
 					box-shadow: inset 260px 0 0 0 " . esc_attr( $primary_color ) . ";
-				}				
+				}
+				.woocommerce input.button:disabled:hover,.woocommerce input.button:disabled[disabled]:hover {
+					background: transparent;
+					border-radius: 0;
+					box-shadow: inset 260px 0 0 0 " . esc_attr( $primary_color ) . ";
+				}			
 			"."\n";			
 		}
 	}

@@ -182,10 +182,19 @@ textarea {
 	width: 100%;
 }
 
+.woocommerce #review_form #respond textarea {
+	min-height: 110px;
+	max-height: 600px;
+	min-width: 100%;
+}
+
+.woocommerce-MyAccount-content fieldset {
+	margin-bottom: 20px;
+}
+
 /*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
-
 
 /*--------------------------------------------------------------
 ## Menus
@@ -1058,6 +1067,19 @@ img {
 #wp-custom-header-video-button:hover {
 	opacity: 1;
 }
+.slider-warning {
+	/* warning text, currently used as a slider missing warning */
+	padding: 100px 20px;
+	text-align: center;
+	background: #ff6b7e;
+	color: #ffffff;
+	position: relative;
+	z-index: 12;
+}
+.slider-warning--slider + .header-text {
+	/* if the slider warning for the lack of slider images is present, hide header text */
+	display: none;
+}
 /* Sticky header */
 .sticky-header .site-header {
 	position: static;
@@ -1378,6 +1400,7 @@ img {
 	background-color: #ce3245;
 	color: #fff;
 	padding: 60px;
+	width: 100%;
 }
 /*--------------------------------------------------------------
 ## Footer
@@ -1575,7 +1598,7 @@ img {
 ## Woocommerce
 --------------------------------------------------------------*/
 .woocommerce div.product p.price,
- .woocommerce div.product span.price,
+.woocommerce div.product span.price,
 .woocommerce ul.products li.product .price {
 	color: #000;
 	letter-spacing: 1px;
@@ -1585,8 +1608,35 @@ img {
 }
 .woocommerce ul.products li.product,
 .woocommerce-page ul.products li.product {
-	width: 30.8%;
+	width: 30.75%;
 }
+/* ignis pro only */
+.woocommerce .columns-1 ul.products li.product,
+.woocommerce-page .columns-1 ul.products li.product,
+.woocommerce.ignis-related-columns-1 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-1 .upsells ul.products li.product {
+	width: 100%;
+	margin-right: 0;
+}
+.woocommerce .columns-2 ul.products li.product,
+.woocommerce-page .columns-2 ul.products li.product,
+.woocommerce.ignis-related-columns-2 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-2 .upsells ul.products li.product {
+	width: 48%;
+}
+.woocommerce .columns-3 ul.products li.product,
+.woocommerce-page .columns-3 ul.products li.product,
+.woocommerce.ignis-related-columns-3 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-3 .upsells ul.products li.product {
+	width: 30.75%;
+}
+.woocommerce .columns-4 ul.products li.product,
+.woocommerce-page .columns-4 ul.products li.product,
+.woocommerce.ignis-related-columns-4 .related ul.products li.product,
+.woocommerce.ignis-upsell-columns-4 .upsells ul.products li.product {
+	width: 22.15%;
+}
+/* end ignis pro only */
 .woocommerce-account .content-area,
 .woocommerce-checkout .content-area,
 .woocommerce-cart .content-area {
@@ -1629,18 +1679,26 @@ img {
 .woocommerce a.remove:hover {
 	background-color: #ff6b7e;
 }
+.woocommerce #respond input#submit,
+.woocommerce #respond input#submit:hover,
+.woocommerce button.button,
+.woocommerce button.button:hover,
+.woocommerce a.button,
+.woocommerce a.button:hover,
 .woocommerce input.button,
-.woocommerce input.button:hover {
-	background-color: #333;
+.woocommerce input.button:hover,
+.woocommerce input.button:disabled,
+.woocommerce input.button:disabled:hover,
+.woocommerce input.button:disabled[disabled],
+.woocommerce input.button:disabled[disabled]:hover {
+	background-color: #ff6b7e;
 	color: #fff;
+	border-radius: 0;
 }
 .woocommerce-cart table.cart td.actions .coupon .input-text {
 	border: 2px solid #dde2e6;
 	width: 100% !important;
 	max-width: 150px;
-}
-.woocommerce input.button:disabled {
-	color: #fff !important;
 }
 .woocommerce-tabs h2,
 .upsells h2,
@@ -1686,6 +1744,7 @@ img {
 .woocommerce-MyAccount-navigation ul {
 	list-style: none;
 	padding: 0;
+	margin-top: 0;
 }
 .woocommerce-MyAccount-navigation li {
 	border-bottom: 2px solid #dde2e6;
@@ -1817,15 +1876,17 @@ img {
 	.portfolio-type-4 .loop-ribbon-inner {
 		padding: 30px;
 	}
+	.portfolio-type-4 .entry-header .entry-title {
+		font-size: 18px;
+	}
 	.portfolio-type-5 .hentry {
 		padding: 30px;
 	}
 	.portfolio-type-5 .entry-header .entry-title {
-		font-size: 28px;
+		font-size: 24px;
 	}
 	.footer-contact-form {
 		width: 70%;
-		margin-top: -220px;
 	}
 }
 @media only screen and (max-width: 1024px) {
@@ -1863,6 +1924,9 @@ img {
 	.widget {
 		padding: 15px 0;
 	}
+	.portfolio-type-2 .entry-header .entry-title {
+		font-size: 36px;
+	}
 	.portfolio-type-3 .hentry,
 	.portfolio-type-4 .hentry {
 		padding: 10px;
@@ -1875,18 +1939,19 @@ img {
 	.portfolio-type-4 .ignis-sizer {
 		width: 33%;
 	}
-	.footer-banner.has-contact {
-		margin-top: 100px;
+	.portfolio-type-5 .entry-header .entry-title {
+		font-size: 20px;
 	}
 	.footer-contact-form {
 		width: 90%;
 		max-width: 600px;
-		margin-top: -130px;
+		margin-top: -160px;
 	}
 }
 @media only screen and (max-width: 767px) {
 	.portfolio-type-1 .hentry,
 	.portfolio-type-2 .hentry,
+	.portfolio-type-3 .hentry,
 	.portfolio-type-5 .hentry {
 		padding: 10px 0;
 	}
@@ -1896,19 +1961,30 @@ img {
 	.portfolio-type-2 .hentry > a {
 		width: 80%;
 	}
+	.portfolio-type-2 .portfolio-content {
+		width: 80%;
+		margin-left: -50%;
+	}
+	.portfolio-type-2 .hentry:nth-of-type(2n) .portfolio-content {
+		margin-right: -50%;
+	}
+	.portfolio-type-2 .portfolio-entry-meta {
+		margin-bottom: 5px;
+	}
 	.portfolio-type-2 .entry-header {
 		padding: 15px;
 	}
 	.portfolio-type-1 .hentry,
 	.portfolio-type-1 .ignis-sizer,
 	.portfolio-type-3 .hentry,
-	.portfolio-type-3 .ignis-sizer
+	.portfolio-type-3 .ignis-sizer,
 	.portfolio-type-5 .hentry,
 	.portfolio-type-5 .ignis-sizer {
 		width: 100%;
 	}
-	.portfolio-type-2 .entry-header .entry-title {
-		font-size: 28px;
+	.portfolio-type-2 .entry-header .entry-title,
+	.portfolio-type-5 .entry-header .entry-title {
+		font-size: 26px;
 	}
 	.portfolio-type-2 .portfolio-read-more a,
 	.portfolio-type-2 .portfolio-entry-meta a {
@@ -1923,13 +1999,16 @@ img {
 		width: 50%;
 	}
 	.portfolio-type-4 .entry-header .entry-title {
-		font-size: 20px;
+		font-size: 16px;
 	}
 	.portfolio-type-5 .hentry:nth-of-type(2) {
 		margin-top: 0px;
 	}
-	.portfolio-type-5 .entry-header .entry-title {
-		font-size: 26px;
+	.portfolio-type-5 .portfolio-content .entry-title {
+		margin-top: 5px;
+	}
+	.portfolio-read-more {
+		margin-top: 5px;
 	}
 	.loop-ribbon-inner {
 		padding: 30px;
@@ -1954,36 +2033,54 @@ img {
 		padding-top: 50px;
 		padding-bottom: 50px;
 	}
-	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce-page[class*=columns-] ul.products li.product, .woocommerce[class*=columns-] ul.products li.product {
+	.woocommerce ul.products li.product, 
+	.woocommerce-page ul.products li.product, 
+	.woocommerce-page[class*=columns-] ul.products li.product, 
+	.woocommerce[class*=columns-] ul.products li.product {
 	    width: 48%;
 	    float: left;
 	    clear: both;
 	    margin: 0 0 2.992em;
 	}
+	.woocommerce-page .columns-2 ul.products li.product, .woocommerce .columns-2 ul.products li.product,
+	.woocommerce-page .columns-3 ul.products li.product, .woocommerce .columns-3 ul.products li.product,
+	.woocommerce-page .columns-4 ul.products li.product, .woocommerce .columns-4 ul.products li.product,
+	.woocommerce.ignis-related-columns-2 .related ul.products li.product, .woocommerce.ignis-upsell-columns-2 .upsells ul.products li.product,
+	.woocommerce.ignis-related-columns-3 .related ul.products li.product, .woocommerce.ignis-upsell-columns-3 .upsells ul.products li.product
+	.woocommerce.ignis-related-columns-4 .related ul.products li.product, .woocommerce.ignis-upsell-columns-4 .upsells ul.products li.product {
+	    width: 48%;
+	}
+	.woocommerce-page .columns-1 ul.products li.product, .woocommerce .columns-1 ul.products li.product,
+	.woocommerce.ignis-related-columns-1 .related ul.products li.product, .woocommerce.ignis-upsell-columns-1 .upsells ul.products li.product {
+	    width: 100%;
+	}
 	.footer-banner.has-contact {
-		margin-top: 100px;
-		padding: 0 15px;
+		padding: 0;
 	}
 	.footer-contact-form {
-		width: 100%;
-		max-width: 100%;
+		width: auto;
+		max-width: none;
 		padding: 45px 30px;
+		margin-left: -15px;
+		margin-right: -15px;
 	}
 }	
 
 @media only screen and (max-width: 400px) {
-	.portfolio-type-1 .hentry {
+	.portfolio-type-1 .hentry,
+	.portfolio-type-4 .hentry {
 		width: 100%;
 		padding: 10px 0;
 	}
-	.portfolio-type-1 .entry-header .entry-title {
+	.portfolio-type-1 .entry-header .entry-title,
+	.portfolio-type-2 .entry-header .entry-title,
+	.portfolio-type-3 .entry-header .entry-title,
+	.portfolio-type-4 .entry-header .entry-title,
+	.portfolio-type-5 .entry-header .entry-title {
 		font-size: 18px;
 	}
 	.portfolio-type-2 .hentry {
 		margin-bottom: 5px;
-	}
-	.portfolio-type-2 .entry-header .entry-title {
-		font-size: 22px;
 	}
 	.portfolio-type-2 .portfolio-read-more a,
 	.portfolio-type-2 .portfolio-entry-meta a {
@@ -1993,13 +2090,17 @@ img {
 	.portfolio-type-4 .ignis-sizer {
 		width: 100%;
 	}
-	.portfolio-type-5 .entry-header .entry-title {
-		font-size: 20px;
-	}
 	.portfolio-content {
 		left: 0;
 	}
-	.woocommerce ul.products li.product, .woocommerce-page ul.products li.product, .woocommerce-page[class*=columns-] ul.products li.product, .woocommerce[class*=columns-] ul.products li.product {
+	.woocommerce ul.products li.product, 
+	.woocommerce-page ul.products li.product, 
+	.woocommerce-page[class*=columns-] ul.products li.product, 
+	.woocommerce[class*=columns-] ul.products li.product, 
+	.woocommerce-page div[class*=columns-] ul.products li.product, 
+	.woocommerce div[class*=columns-] ul.products li.product,
+	.woocommerce[class*=ignis-related-columns-] .related ul.products li.product, 
+	.woocommerce[class*=ignis-upsell-columns-] .upsells ul.products li.product {
 		width: 100%;
 	}
 }

@@ -28,10 +28,13 @@ function ignis_woo_actions() {
     add_action('woocommerce_before_main_content', 'ignis_wrapper_start', 10);
     add_action('woocommerce_after_main_content', 'ignis_wrapper_end', 10);
     remove_action( 'woocommerce_sidebar', 'woocommerce_get_sidebar' );
-    remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
     add_filter( 'woocommerce_show_page_title', '__return_false' );
     remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5);
     remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
+    add_action( 'woocommerce_before_shop_loop', 'ignis_product_columns_wrapper_start', 40 );
+    add_action( 'woocommerce_after_shop_loop', 'ignis_product_columns_wrapper_end', 40 );
+    remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display',               15 );
+    add_action( 'woocommerce_after_single_product_summary',    'ignis_upsell_display',                15 );
 }
 add_action('wp','ignis_woo_actions');
 
@@ -48,17 +51,6 @@ function ignis_wrapper_end() {
         echo '</main>';
     echo '</div>';
 }
-
-/**
- * Number of related products
- */
-function ignis_related_products_args( $args ) {
-    $args['posts_per_page'] = 3;
-    $args['columns'] = 3;
-    return $args;
-}
-add_filter( 'woocommerce_output_related_products_args', 'ignis_related_products_args' );
-
 
 /**
  * Update cart
@@ -106,7 +98,6 @@ function ignis_woocommerce_account_link( $items, $args ) {
 }
 add_filter( 'wp_nav_menu_items', 'ignis_woocommerce_account_link', 10, 2 );
 
-
 /**
  * Search icon
  */
@@ -118,7 +109,6 @@ function ignis_menu_search( $items, $args ) {
     return $items;
 }
 add_filter( 'wp_nav_menu_items', 'ignis_menu_search', 10, 2 );
-
 
 /**
  * Returns true if current page is shop, product archive or product tag
@@ -132,9 +122,162 @@ function ignis_wc_archive_check() {
 }
 
 /**
- * Number of columns
+ * Number of products on shop/archive page
+ */
+function ignis_archive_products() {
+    $productsNum = get_theme_mod( 'iwc_products_number', 10 );
+
+    return $productsNum;
+}
+add_filter( 'loop_shop_per_page', 'ignis_archive_products', 20 );
+
+/**
+ * Number of columns on shop/archive page
  */
 function ignis_archive_columns() {
-    return 3;
+    $columnsNum = get_theme_mod( 'iwc_columns_number', 3 );
+
+    return $columnsNum;
 }
 add_filter( 'loop_shop_columns', 'ignis_archive_columns' );
+
+/**
+ * Number of related products and columns
+ */
+function ignis_related_products_args( $args ) {
+    $productsNum = get_theme_mod( 'iwc_related_products_number', 3 );
+    $columnsNum = get_theme_mod( 'iwc_related_columns_number', 3 );
+
+    $args['posts_per_page'] = $productsNum;
+    $args['columns'] = $columnsNum;
+    return $args;
+}
+add_filter( 'woocommerce_output_related_products_args', 'ignis_related_products_args' );
+
+/**
+ * Number of upsell product columns (number of upsells is selected through the single product edit screen)
+ * Using the same column number for upsell and related products
+ */
+function ignis_upsell_display() {
+    $columnsNum = get_theme_mod( 'iwc_related_columns_number', 3 );
+    woocommerce_upsell_display( -1, $columnsNum );
+}
+
+/**
+ * Product shop/archive wrappers
+ * Based on this wrapper and the class added, we are able to style the width of the Shop/Archive products accordingly.
+ */
+function ignis_product_columns_wrapper_start() {
+    $columnsNum = ignis_archive_columns();
+    echo '<div class="columns-' . $columnsNum . '">';
+}
+
+function ignis_product_columns_wrapper_end() {
+    echo '</div>';
+}
+
+/**
+ * Add number of related/uspsell product columns class to the body
+ * Based on this class we are able to style the width of the Related and Upsell products accordingly. 
+ * Woocommerce doesn't wrap these elements with the columns-# class out-of-the-box
+ */
+function ignis_woocommerce_body_class( $classes ){
+    if( is_product() ) {
+        $columnsNum = get_theme_mod( 'iwc_related_columns_number', 3 );
+        if ($columnsNum) {
+            $classes[] = 'ignis-related-columns-' . $columnsNum;
+            $classes[] = 'ignis-upsell-columns-' . $columnsNum;
+        }
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'ignis_woocommerce_body_class' );
+
+/**
+ * Remove Price on the shop/archive page if the user selected that option
+ */
+function ignis_price_customizer_check() {
+    $iwc_archive_price = get_theme_mod('iwc_archive_price');
+    if ( $iwc_archive_price == 1 ) :
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
+	endif;
+}
+add_action('wp','ignis_price_customizer_check');
+
+/**
+ * Remove Rating on the shop/archive page if the user selected that option
+ */
+function ignis_archive_ratings_customizer_check() {
+    $iwc_archive_ratings = get_theme_mod('iwc_archive_ratings');
+    if ( $iwc_archive_ratings == 1 ) :
+		remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+	endif;
+}
+add_action('wp','ignis_archive_ratings_customizer_check');
+
+/**
+ * Remove Rating on the single product page if the user selected that option
+ */
+function ignis_single_ratings_customizer_check() {
+    $iwc_product_ratings = get_theme_mod('iwc_product_ratings');
+    if ( $iwc_product_ratings == 1 ) :
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10 );
+	endif;
+}
+add_action('wp','ignis_single_ratings_customizer_check');
+
+/**
+ * Remove number of Results on the shop/archive page if the user selected that option
+ */
+function ignis_archive_results_customizer_check() {
+    $iwc_archive_results = get_theme_mod('iwc_archive_results');
+    if ( $iwc_archive_results == 1 ) :
+		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+	endif;
+}
+add_action('wp','ignis_archive_results_customizer_check');
+
+/**
+ * Remove Categories on the single product page if the user selected that option
+ * The downside is that this hook removes the entire single product meta that contains the SKU, Categories and Tags
+ */
+function ignis_single_cats_customizer_check() {
+    $iwc_product_cats = get_theme_mod('iwc_product_cats');
+    if ( $iwc_product_cats == 1 ) :
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+	endif;
+}
+add_action('wp','ignis_single_cats_customizer_check');
+
+/**
+ * Remove Ordering/Sorting on the shop/archive page if the user selected that option
+ */
+function ignis_sorting_customizer_check() {
+    $iwc_archive_sorting = get_theme_mod('iwc_archive_sorting');
+    if ( $iwc_archive_sorting == 1 ) :
+		remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+	endif;
+}
+add_action('wp','ignis_sorting_customizer_check');
+
+/**
+ * Remove Add to cart button on the shop/archive page if the user selected that option
+ */
+function ignis_atc_customizer_check() {
+    $iwc_archive_atc = get_theme_mod('iwc_archive_atc');
+    if ( $iwc_archive_atc == 1 ) :
+		remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
+	endif;
+}
+add_action('wp','ignis_atc_customizer_check');
+
+/**
+ * Remove Breadcrumbs on the shop/archive and single product pages if the user selected that option
+ */
+function ignis_bc_customizer_check() {
+    $iwc_archive_bc = get_theme_mod('iwc_archive_bc');
+    if ( $iwc_archive_bc == 1 ) :
+		remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0 );
+	endif;
+}
+add_action('wp','ignis_bc_customizer_check');

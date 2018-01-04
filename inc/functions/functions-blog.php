@@ -30,7 +30,11 @@ function ignis_fullwidth_singles($classes) {
 		$classes[] = 'wow fadeInUp';
 	}
 
-    if ( ( 'post' === get_post_type() ) && ( is_home() || is_archive() || is_search() ) && ( $layout == 'masonry' || $layout == 'masonry-fullwidth' ) ) {
+    if ( ( 'post' === get_post_type() ) && ( is_home() || is_archive() ) && ( $layout == 'masonry' || $layout == 'masonry-fullwidth' ) ) {
+        $classes[] = 'col-md-6 col-sm-6';
+    }
+
+    if ( ( is_search() ) && ( $layout == 'masonry' || $layout == 'masonry-fullwidth' ) ) {
         $classes[] = 'col-md-6 col-sm-6';
     }
 

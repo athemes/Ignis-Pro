@@ -861,7 +861,7 @@ function ignis_customize_register( $wp_customize ) {
             ),
         )
     );
-
+    
     //___Woocommerce___//
     $wp_customize->add_section(
         'ignis_section_woocommerce',
@@ -904,7 +904,49 @@ function ignis_customize_register( $wp_customize ) {
             'type'        => 'select',
             'label'       => __('Columns on shop archives', 'ignis'),
             'section'     => 'ignis_section_woocommerce',
-            'priority'    => 13,
+            'priority'    => 12,
+            'choices' => array(
+                '1'     => __('One', 'ignis'),
+                '2'     => __('Two', 'ignis'),
+                '3'     => __('Three', 'ignis'),
+                '4'     => __('Four', 'ignis'),
+            ),
+        )
+    ); 
+    //Related products no.
+    $wp_customize->add_setting(
+        'iwc_related_products_number',
+        array(
+            'sanitize_callback' => 'absint',
+            'default'           => '3',
+        )       
+    );
+    $wp_customize->add_control( 'iwc_related_products_number', array(
+        'type'        => 'number',
+        'priority'    => 13,
+        'section'     => 'ignis_section_woocommerce',
+        'label'       => __('Number of related products on single product page', 'ignis'),
+        'input_attrs' => array(
+            'min'   => 1,
+            'max'   => 100,
+            'step'  => 1,
+        ),
+    ) );
+    //Related products columns
+    $wp_customize->add_setting(
+        'iwc_related_columns_number',
+        array(
+            'sanitize_callback' => 'ignis_sanitize_iwc_columns',
+            'default'           => '3'
+        )
+    );
+    $wp_customize->add_control(
+        'iwc_related_columns_number',
+        array(
+            'type'        => 'select',
+            'label'       => __('Columns on single product page related and upsell products', 'ignis'),
+            'section'     => 'ignis_section_woocommerce',
+            'priority'    => 14,
             'choices' => array(
                 '1'     => __('One', 'ignis'),
                 '2'     => __('Two', 'ignis'),
@@ -924,7 +966,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_price',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product price on archives?', 'ignis'),
+            'label'     => __('Hide product price on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 15,
         )
@@ -940,7 +982,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_ratings',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product ratings on archives?', 'ignis'),
+            'label'     => __('Hide product ratings on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 15,
         )
@@ -956,7 +998,7 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_results',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide number of results on archives?', 'ignis'),
+            'label'     => __('Hide number of results on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
             'priority'  => 16,
         )
@@ -972,9 +1014,42 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_archive_sorting',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide sorting on archives?', 'ignis'),
+            'label'     => __('Hide sorting on shop and archive pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
-            'priority'  => 17,
+            'priority'  => 16,
+        )
+    );
+    //Add to cart
+    $wp_customize->add_setting(
+        'iwc_archive_atc',
+        array(
+            'sanitize_callback' => 'ignis_sanitize_checkbox',
+            'default' => 1,
+        )       
+    );
+    $wp_customize->add_control(
+        'iwc_archive_atc',
+        array(
+            'type'      => 'checkbox',
+            'label'     => __('Hide "add to cart" button on shop and archive pages?', 'ignis'),
+            'section'   => 'ignis_section_woocommerce',
+            'priority'  => 16,
+        )
+    );
+    //Shop breadcrumbs
+    $wp_customize->add_setting(
+        'iwc_archive_bc',
+        array(
+            'sanitize_callback' => 'ignis_sanitize_checkbox',
+        )       
+    );
+    $wp_customize->add_control(
+        'iwc_archive_bc',
+        array(
+            'type'      => 'checkbox',
+            'label'     => __('Hide breadcrumbs on shop and archive and single product pages?', 'ignis'),
+            'section'   => 'ignis_section_woocommerce',
+            'priority'  => 16,
         )
     );
     //Ratings
@@ -988,12 +1063,12 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_product_ratings',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product ratings on single products?', 'ignis'),
+            'label'     => __('Hide product ratings on single product pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
-            'priority'  => 15,
+            'priority'  => 17,
         )
     );
-    //Categories
+    //Categories, SKU and Tags
     $wp_customize->add_setting(
         'iwc_product_cats',
         array(
@@ -1004,9 +1079,9 @@ function ignis_customize_register( $wp_customize ) {
         'iwc_product_cats',
         array(
             'type'      => 'checkbox',
-            'label'     => __('Hide product categories on single products?', 'ignis'),
+            'label'     => __('Hide product meta (SKU, categories and tags) on single product pages?', 'ignis'),
             'section'   => 'ignis_section_woocommerce',
-            'priority'  => 16,
+            'priority'  => 17,
         )
     );
 
@@ -1015,7 +1090,7 @@ function ignis_customize_register( $wp_customize ) {
     $wp_customize->add_setting(
         'hero_type',
         array(
-            'default'           => 'has-slider',
+            'default'           => 'has-media',
             'sanitize_callback' => 'ignis_sanitize_header',
         )
     );
@@ -1030,6 +1105,7 @@ function ignis_customize_register( $wp_customize ) {
                 'has-slider'    => __('Slider', 'ignis'),            	
                 'has-media'     => __('Image or video', 'ignis'),
                 'has-shortcode' => __('Shortcode', 'ignis'),
+                'has-none' => __('None', 'ignis'),
             ),
         )
     );
@@ -1161,7 +1237,7 @@ function ignis_sanitize_iwc_columns( $input ) {
 }
 //Header type
 function ignis_sanitize_header( $input ) {
-    if ( in_array( $input, array( 'has-media', 'has-slider', 'has-shortcode' ), true ) ) {
+    if ( in_array( $input, array( 'has-media', 'has-slider', 'has-shortcode', 'has-none' ), true ) ) {
         return $input;
     }
 }
