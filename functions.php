@@ -265,3 +265,27 @@ function ignis_get_gallery_control() {
 	require get_template_directory() . '/inc/gallery-control/gallery-control-class.php';
 }
 add_action( 'customize_register', 'ignis_get_gallery_control', 9 );
+
+
+/**
+ * Load theme updater functions.
+ */
+function ignis_pro_updater() {
+    require( get_template_directory() . '/updater/theme-updater.php' );
+}
+add_action( 'after_setup_theme', 'ignis_pro_updater' );
+
+/**
+ * License notice
+ */
+function ignis_pro_admin_notice(){
+
+	$license = get_option( 'ignis-pro_license_key' );
+
+	if (!$license) {
+	    echo '<div class="updated">';
+	    echo 	'<p>Please activate your license key for Ignis Pro to get the latest theme updates automatically. You can get your key from your <a href="http://athemes.com/your-account/" target="_blank">aThemes account</a> and activate it <a href="' . menu_page_url( 'ignis-pro-license' ,0 ) . '">here</a></p>';
+	    echo '</div>';
+	}
+}
+add_action('admin_notices', 'ignis_pro_admin_notice');
